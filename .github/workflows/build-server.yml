@@ -1,0 +1,27 @@
+---
+name: Build bonkyOS server
+on:
+  schedule:
+    - cron: "05 10 * * 0" # 10:05am UTC Sunday
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+  workflow_call:
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+jobs:
+  build-image:
+    name: Build Images
+    uses: ./.github/workflows/build-image.yml
+    secrets: inherit
+    strategy:
+      fail-fast: false
+      matrix:
+        image_flavor: ["server"]
+    with:
+      image_flavor: ${{ matrix.image_flavor }}
