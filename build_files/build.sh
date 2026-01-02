@@ -9,12 +9,18 @@ set -ouex pipefail
 # List of rpmfusion packages can be found here:
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
+case "${IMAGE}" in
+"ucore"*)
+    echo "::group:: ===Server Changes==="
+    /ctx/server-changes.sh
+    echo "::endgroup::"
+    ;;
+esac
+
 # this installs a package from fedora repos
-dnf5 config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
 dnf5 install -y \
-	jq \
-	nomad \
-	zsh
+  jq \
+  zsh
 
 # Use a COPR Example:
 #

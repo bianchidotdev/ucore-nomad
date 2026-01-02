@@ -1,5 +1,5 @@
 ---
-name: Build bonkyOS server
+name: Build bonkyos server
 on:
   schedule:
     - cron: "05 10 * * 0" # 10:05am UTC Sunday

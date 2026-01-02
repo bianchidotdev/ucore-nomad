@@ -1,9 +1,12 @@
+ARG BASE_IMAGE="ucore"
+ARG TAG_VERSION="stable"
+
 # Allow build scripts to be referenced without being copied into the final image
 FROM scratch AS ctx
 COPY build_files /
 
 # Base Image
-FROM ghcr.io/ublue-os/${BASE_IMAGE}:stable
+FROM ghcr.io/ublue-os/${BASE_IMAGE}:${TAG_VERSION}
 
 ### [IM]MUTABLE /opt
 ## Some bootable images, like Fedora, have /opt symlinked to /var/opt, in order to
